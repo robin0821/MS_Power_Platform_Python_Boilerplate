@@ -20,7 +20,7 @@ services:
       - ALLOW_IP_RANGE=0.0.0.0/0
       - POSTGRES_USER=robindu
       - POSTGRES_DBNAME=Each
-      - POSTGRES_PASS=*******
+      - POSTGRES_PASS=Each2022
       - POSTGRES_MULTIPLE_EXTENSIONS=postgis,hstore,postgis_topology,postgis_raster,pgrouting
     volumes:
       - postgres:/var/lib/postgresql
@@ -34,9 +34,26 @@ services:
       - pgadmin4:/var/lib/pgadmin
     environment:
       - PGADMIN_DEFAULT_EMAIL=robin.du@each.com.au
-      - PGADMIN_DEFAULT_PASSWORD=*******
+      - PGADMIN_DEFAULT_PASSWORD=Each2020
+  neo4j:
+    image: neo4j:latest
+    restart: always
+    ports:
+      - 7474:7474
+      - 7687:7687
+    environment:
+      - NEO4J_AUTH=neo4j/SuansToy
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+      - neo4j_import:/var/lib/neo4j/import
+      - neo4j_plugins:/plugins
 
 volumes:
   jupyterhub_data:
   postgres:
   pgadmin4:
+  neo4j_data:
+  neo4j_logs:
+  neo4j_import:
+  neo4j_plugins:
